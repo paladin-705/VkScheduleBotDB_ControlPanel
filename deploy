@@ -22,6 +22,6 @@ printf "SECRET_KEY='%s'\n"           "$SECRET_KEY" >> config.cfg
 cp config.cfg app/config.cfg
 rm config.cfg
 
-cp /usr/share/zoneinfo/$5 /etc/localtime && echo $6 > /etc/timezone
+cp /usr/share/zoneinfo/$6 /etc/localtime && echo $6 > /etc/timezone
 
 gunicorn control_panel:app --workers 4 -b unix:/control_panel/socket/control_panel.sock
