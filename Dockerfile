@@ -2,9 +2,6 @@ FROM python:3.6-alpine
 
 LABEL maintainer="Sergey Kornev <paladin705@yandex.ru>"
 
-RUN addgroup -S control_panel_group && adduser -S control_panel_ -G control_panel_group
-USER control_panel_user
-
 ENV TZ="Europe/Moscow"
 
 ENV DB_NAME=
