@@ -2,7 +2,7 @@ FROM python:3.6-alpine
 
 LABEL maintainer="Sergey Kornev <paladin705@yandex.ru>"
 
-RUN useradd control_panel_user
+RUN addgroup -S control_panel_group && adduser -S control_panel_ -G control_panel_group
 
 ENV TZ="Europe/Moscow"
 
