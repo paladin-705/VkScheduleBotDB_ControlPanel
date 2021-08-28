@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    {% if new_groups is defined %}
+        <h1>В базу данных будут добавлены следующие группы:</h1>
+
+        <table id="data" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Организация</th>
+                    <th>Факультет</th>
+                    <th>Группа</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for group in new_groups %}
+                    <tr>
+                        <td>{{ group.organization }}</td>
+                        <td>{{ group.faculty }}</td>
+                        <td>{{ group.group }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    {% endif %}
+
+    <h1>Проверка расписания занятий (экзаменов)</h1>
+
+    <div class="alert alert-info" role="alert">
+        Обработка данных может занять время. Пожалуйста, не перезагружайте страницу после отправки формы
+    </div>
+
+    {{ wtf.quick_form(form) }}
+
+{% endblock %}

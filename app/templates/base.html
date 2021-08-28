@@ -1,0 +1,66 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+    {% if title %}{{ title }} - Bot DB Control Panel{% else %}Bot DB Control Panel{% endif %}
+{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('main_data.index') }}">Главная</a>
+                <a class="navbar-brand" href="{{ url_for('show_data.show_data') }}">Просмотр данных</a>
+                <a class="navbar-brand" href="{{ url_for('parse_data.parse_data') }}">Парсинг</a>
+                <a class="navbar-brand" href="{{ url_for('check_data.check_data') }}">Проверка</a>
+                <a class="navbar-brand" href="{{ url_for('add_data.add_schedule_data') }}">Загрузка расписания</a>
+                <a class="navbar-brand" href="{{ url_for('add_data.add_group_data') }}">Добавление</a>
+                <a class="navbar-brand" href="{{ url_for('update_data.update_data') }}">Изменение</a>
+                <a class="navbar-brand" href="{{ url_for('delete_data.delete_data') }}">Удаление</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    {% if current_user.is_anonymous %}
+                        <li><a href="{{ url_for('auth.login') }}">Вход</a></li>
+                    {% else %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ current_user.username }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url_for('auth.accounts_list') }}">Список аккаунтов</a>
+                                <a class="dropdown-item" href="{{ url_for('auth.add_account') }}">Добавление аккаунтов</a>
+                                <a class="dropdown-item" href="{{ url_for('auth.delete_account') }}">Удаление аккаунтов</a>
+                            </div>
+                        </li>
+                        <li><a href="{{ url_for('auth.logout') }}">Выход</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-info" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% block app_content %}{% endblock %}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+{% endblock %}

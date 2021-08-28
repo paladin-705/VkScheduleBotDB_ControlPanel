@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>Список групп в базе данных</h1>
+
+    <table id="data" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Организация</th>
+                <th>Факультет</th>
+                <th>Группа</th>
+                <th>Tag</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if groups_list is defined %}
+                {% for group in groups_list %}
+                    <tr>
+                        <td>{{ group.organization }}</td>
+                        <td>{{ group.faculty }}</td>
+                        <td>{{ group.group }}</td>
+                        <td>{{ group.tag }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+      </table>
+{% endblock %}

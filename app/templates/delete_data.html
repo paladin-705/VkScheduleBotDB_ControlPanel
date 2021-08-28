@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>Удаление данных</h1>
+
+    <ul>
+        <li>
+            <a href="{{ url_for('delete_data.delete_organization') }}">Удаление организации</a>
+        </li>
+        <li>
+            <a href="{{ url_for('delete_data.delete_faculty') }}">Удаление факультета</a>
+        </li>
+        <li>
+            <a href="{{ url_for('delete_data.delete_group') }}">Удаление группы</a>
+        </li>
+        <li>
+            <a href="{{ url_for('delete_data.delete_group_schedule') }}">Удаление расписания занятий выбранной группы</a>
+        </li>
+        <li>
+            <a href="{{ url_for('delete_data.delete_group_exams') }}">Удаление расписания экзаменов выбранной группы</a>
+        </li>
+        <li>
+            <a href="{{ url_for('delete_data.delete_all_schedule') }}">Удаление расписания занятий всех групп</a>
+        </li>
+        <li>
+            <a href="{{ url_for('delete_data.delete_all_exams') }}">Удаление расписания экзаменов всех групп</a>
+        </li>
+        <li>
+            <a href="{{ url_for('delete_data.delete_old_groups') }}">Удаление выпустившихся групп</a>
+        </li>
+    </ul>
+{% endblock %}

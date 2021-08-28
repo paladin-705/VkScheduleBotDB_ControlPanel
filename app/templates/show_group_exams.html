@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>Расписание экзаменов отдельной группы</h1>
+
+    {{ wtf.quick_form(form) }}
+
+    {% if exams_table is defined %}
+        <table id="data" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>День</th>
+                    <th>Название</th>
+                    <th>Кабинет</th>
+                    <th>Преподаватель</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in exams_table %}
+                    <tr>
+                        <td>{{ data.day }}</td>
+                        <td>{{ data.title }}</td>
+                        <td>{{ data.classroom }}</td>
+                        <td>{{ data.lecturer }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

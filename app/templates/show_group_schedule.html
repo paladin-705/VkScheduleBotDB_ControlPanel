@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>Расписание занятий отдельной группы</h1>
+
+    {{ wtf.quick_form(form) }}
+
+    {% if schedule_table is defined %}
+        <table id="data" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>День</th>
+                    <th>Номер</th>
+                    <th>Тип</th>
+                    <th>Название</th>
+                    <th>Кабинет</th>
+                    <th>Преподаватель</th>
+                    <th>Начало</th>
+                    <th>Конец</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in schedule_table %}
+                    <tr>
+                        <td>{{ data.day }}</td>
+                        <td>{{ data.number }}</td>
+                        <td>{{ data.week_type }}</td>
+                        <td>{{ data.title }}</td>
+                        <td>{{ data.classroom }}</td>
+                        <td>{{ data.lecturer }}</td>
+                        <td>{{ data.time_start }}</td>
+                        <td>{{ data.time_end }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

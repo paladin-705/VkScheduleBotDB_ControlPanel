@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>Список аккаунтов в базе данных</h1>
+
+    <table id="data" class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Имя пользователя</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if users_table is defined %}
+                {% for user in users_table %}
+                    <tr>
+                        <td>{{ user.user_id }}</td>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+
+    <h1>Удаление аккаунта</h1>
+
+    {{ wtf.quick_form(form) }}
+{% endblock %}

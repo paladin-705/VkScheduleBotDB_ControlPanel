@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    {% if updated_groups_table is defined %}
+        <h1>Изменённые группы</h1>
+
+        <table id="updated_groups_table" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Организация</th>
+                    <th>Факультет (Old)</th>
+                    <th>Группа (Old)</th>
+                    <th>Tag (Old)</th>
+                    <th>Факультет (New)</th>
+                    <th>Группа (New)</th>
+                    <th>Tag (New)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for group in updated_groups_table %}
+                    <tr>
+                        <td>{{ group.organization }}</td>
+                        <td>{{ group.old_faculty }}</td>
+                        <td>{{ group.old_group }}</td>
+                        <td>{{ group.old_tag }}</td>
+                        <td>{{ group.new_faculty }}</td>
+                        <td>{{ group.new_group }}</td>
+                        <td>{{ group.new_tag }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    {% if error_groups_table is defined %}
+        <h1>Ошибка при обновлении групп</h1>
+
+        <table id="error_groups_table" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Организация</th>
+                    <th>Факультет</th>
+                    <th>Группа</th>
+                    <th>Tag</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for group in error_groups_table %}
+                    <tr>
+                        <td>{{ group.organization }}</td>
+                        <td>{{ group.faculty }}</td>
+                        <td>{{ group.group }}</td>
+                        <td>{{ group.tag }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    {% if skipped_groups_table is defined %}
+        <h1>Пропущенные группы</h1>
+
+        <table id="skipped_groups_table" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Организация</th>
+                    <th>Факультет</th>
+                    <th>Группа</th>
+                    <th>Tag</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for group in skipped_groups_table %}
+                    <tr>
+                        <td>{{ group.organization }}</td>
+                        <td>{{ group.faculty }}</td>
+                        <td>{{ group.group }}</td>
+                        <td>{{ group.tag }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <h1>Автоматическое изменение номеров групп</h1>
+
+    <div class="alert alert-info" role="alert">
+        Обработка данных может занять время. Пожалуйста, не перезагружайте страницу после отправки формы
+    </div>
+
+    {{ wtf.quick_form(form) }}
+{% endblock %}

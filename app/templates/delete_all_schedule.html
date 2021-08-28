@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>Удаление расписания занятий всех групп</h1>
+
+    <div class="alert alert-info" role="alert">
+        Удаление данных может занять время. Пожалуйста, не перезагружайте страницу после отправки формы
+    </div>
+
+    {{ wtf.quick_form(form) }}
+{% endblock %}

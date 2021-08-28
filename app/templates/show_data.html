@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>Просмотр данных</h1>
+
+    <ul>
+        <li>
+            <a href="{{ url_for('show_data.show_group_list') }}">Список групп</a>
+        </li>
+        <li>
+            <a href="{{ url_for('show_data.show_group_schedule') }}">Расписание занятий отдельной группы</a>
+        </li>
+        <li>
+            <a href="{{ url_for('show_data.show_group_exams') }}">Расписание экзаменов отдельной группы</a>
+        </li>
+    </ul>
+{% endblock %}

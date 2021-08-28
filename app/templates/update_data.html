@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>Изменение данных</h1>
+
+    <ul>
+        <li>
+            <a href="{{ url_for('update_data.update_group') }}">Изменение данных группы</a>
+        </li>
+        <li>
+            <a href="{{ url_for('update_data.update_groups_number') }}">Автоматическое изменение номеров групп</a>
+        </li>
+    </ul>
+{% endblock %}
