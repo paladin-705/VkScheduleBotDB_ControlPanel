@@ -336,7 +336,7 @@ def delete_old_groups():
                         for db_group_data in groups_data_list:
                             group, tag = db_group_data
                             if can_be_deleted(faculty, group):
-                                db.delete_schedule(tag)
+                                db.delete_group(org, faculty, group)
                                 deleted_groups_table.append({
                                     'organization': org,
                                     'faculty': faculty,
