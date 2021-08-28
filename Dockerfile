@@ -3,6 +3,7 @@ FROM python:3.6-alpine
 LABEL maintainer="Sergey Kornev <paladin705@yandex.ru>"
 
 RUN addgroup -S control_panel_group && adduser -S control_panel_ -G control_panel_group
+USER control_panel_user
 
 ENV TZ="Europe/Moscow"
 
@@ -27,8 +28,5 @@ RUN pip3 install gunicorn \
     && chmod +x deploy
 
 COPY app ./app
-
-RUN chown -R control_panel_user:control_panel_user ./
-USER control_panel_user
 
 CMD ./deploy ${DB_NAME} ${DB_USER} ${DB_PASSWORD} ${DB_HOST} ${FLASK_ROUTE_PATH} ${TZ}
