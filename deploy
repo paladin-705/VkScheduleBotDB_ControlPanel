@@ -24,4 +24,4 @@ rm config.cfg
 
 cp /usr/share/zoneinfo/$5 /etc/localtime && echo $6 > /etc/timezone
 
-gunicorn app:app --workers 4 -b unix:/api/socket/api.sock
+gunicorn app:app --workers 4 -b unix:/control_panel/socket/control_panel.sock
