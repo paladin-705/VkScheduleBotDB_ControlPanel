@@ -18,12 +18,14 @@ RUN apk update \
     && apk add tzdata \
     && apk add git build-base postgresql-dev libffi-dev
 
-COPY deploy requirements.txt ./
+COPY control_panel.py deploy requirements.txt ./
 
 RUN pip3 install gunicorn \
     && pip3 install -r requirements.txt \
     && chmod +x deploy
 
 COPY app ./app
+
+ENV FLASK_APP control_panel.py
 
 CMD ./deploy ${DB_NAME} ${DB_USER} ${DB_PASSWORD} ${DB_HOST} ${FLASK_ROUTE_PATH} ${TZ}
