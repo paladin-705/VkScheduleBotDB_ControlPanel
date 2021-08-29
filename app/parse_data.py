@@ -36,7 +36,7 @@ def parse_data():
 
     if form.validate_on_submit():
         filename = secure_filename(form.file.data.filename)
-        file_path = 'uploads/'
+        file_path = current_app.config['UPLOAD_DIR_PATH']
         organization = form.organization.data
         header_row = form.header_row.data
         form.file.data.save(file_path + filename)
