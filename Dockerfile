@@ -22,7 +22,8 @@ COPY control_panel.py deploy requirements.txt ./
 
 RUN pip3 install gunicorn \
     && pip3 install -r requirements.txt \
-    && chmod +x deploy
+    && chmod +x deploy \
+    && mkdir uploads
 
 COPY app ./app
 
