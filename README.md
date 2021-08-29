@@ -22,7 +22,7 @@ docker run \
     -e DB_HOST=<Введите значение параметра> \
     -e FLASK_ROUTE_PATH=<Введите значение параметра> \
     -e TZ=<Введите значение параметра> \
-    paladin705/vk_schedule_bot_api:latest
+    paladin705/vk_schedule_bot_db_control_panel:latest
 ```
 
 ### Файлы
