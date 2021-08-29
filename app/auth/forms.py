@@ -14,7 +14,7 @@ class RegistrationForm(FlaskForm):
     username = StringField('Имя пользователя', validators=[DataRequired()])
     password = PasswordField('Пароль', validators=[DataRequired()])
     password2 = PasswordField('Повторите пароль', validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Регистрация')
+    submit = SubmitField('Добавить аккаунт')
 
 
 class DeleteAccountForm(FlaskForm):
