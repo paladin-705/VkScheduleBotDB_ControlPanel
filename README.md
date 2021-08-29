@@ -1,5 +1,5 @@
 # VkScheduleBot Control Panel
-Панель управления базой данных бота. Предоставляет веб-интерфейс для взаимодействия с БД расписания, а также позволяет редактировать пользователей API бота (модуль [api_server](https://github.com/paladin-705/VkScheduleBot/tree/main/api_server)). Панель управления является модулем для [VkScheduleBot](https://github.com/paladin-705/VkScheduleBot).
+Панель управления базой данных бота. Предоставляет веб-интерфейс для взаимодействия с БД расписания, а также позволяет редактировать пользователей API бота (модуль [api_server](https://github.com/paladin-705/VkScheduleBot/tree/main/api_server)). Панель управления является модулем для [VkScheduleBot](https://github.com/paladin-705/VkScheduleBot) и [UniversityScheduleBot](https://github.com/paladin-705/UniversityScheduleBot).
 
 ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/paladin705/vk_schedule_bot_db_control_panel)
 
