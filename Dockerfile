@@ -16,14 +16,14 @@ WORKDIR /control_panel
 RUN apk update \
     && apk upgrade \
     && apk add tzdata \
-    && apk add git build-base postgresql-dev libffi-dev
+    && apk add git build-base postgresql-dev libffi-dev \
+    && mkdir uploads
 
 COPY control_panel.py deploy requirements.txt ./
 
 RUN pip3 install gunicorn \
     && pip3 install -r requirements.txt \
-    && chmod +x deploy \
-    && mkdir uploads
+    && chmod +x deploy
 
 COPY app ./app
 
