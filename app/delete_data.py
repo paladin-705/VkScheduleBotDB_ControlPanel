@@ -71,7 +71,7 @@ class DeleteOldGroups(FlaskForm):
 @bp.route('/delete_data')
 @login_required
 def delete_data():
-    return render_template('delete_data.html')
+    return render_template('delete_data.html', title='Удаление')
 
 
 @bp.route('/delete_organization', methods=['GET', 'POST'])
@@ -82,7 +82,7 @@ def delete_organization():
     if form.validate_on_submit():
         if not form.confirm_delete.data:
             flash('Вы не подтвердили удаление')
-            return render_template('delete_organization.html', form=form)
+            return render_template('delete_organization.html', title='Удаление организации', form=form)
 
         organization = form.organization.data.strip()
         try:
@@ -93,8 +93,8 @@ def delete_organization():
             flash(str(e))
             current_app.logger.warning('delete_organization: {}'.format(str(e)))
         finally:
-            return render_template('delete_organization.html', form=form)
-    return render_template('delete_organization.html', form=form)
+            return render_template('delete_organization.html', title='Удаление организации', form=form)
+    return render_template('delete_organization.html', title='Удаление организации', form=form)
 
 
 @bp.route('/delete_faculty', methods=['GET', 'POST'])
@@ -105,7 +105,7 @@ def delete_faculty():
     if form.validate_on_submit():
         if not form.confirm_delete.data:
             flash('Вы не подтвердили удаление')
-            return render_template('delete_faculty.html', form=form)
+            return render_template('delete_faculty.html', title='Удаление факультета', form=form)
 
         organization = form.organization.data.strip()
         faculty = form.faculty.data.strip()
@@ -117,8 +117,8 @@ def delete_faculty():
             flash(str(e))
             current_app.logger.warning('delete_faculty: {}'.format(str(e)))
         finally:
-            return render_template('delete_faculty.html', form=form)
-    return render_template('delete_faculty.html', form=form)
+            return render_template('delete_faculty.html', title='Удаление факультета', form=form)
+    return render_template('delete_faculty.html', title='Удаление факультета', form=form)
 
 
 @bp.route('/delete_group', methods=['GET', 'POST'])
@@ -129,7 +129,7 @@ def delete_group():
     if form.validate_on_submit():
         if not form.confirm_delete.data:
             flash('Вы не подтвердили удаление')
-            return render_template('delete_group.html', form=form)
+            return render_template('delete_group.html', title='Удаление группы', form=form)
 
         organization = form.organization.data.strip()
         faculty = form.faculty.data.strip()
@@ -142,8 +142,8 @@ def delete_group():
             flash(str(e))
             current_app.logger.warning('delete_group: {}'.format(str(e)))
         finally:
-            return render_template('delete_group.html', form=form)
-    return render_template('delete_group.html', form=form)
+            return render_template('delete_group.html', title='Удаление группы', form=form)
+    return render_template('delete_group.html', title='Удаление группы', form=form)
 
 
 @bp.route('/delete_group_schedule', methods=['GET', 'POST'])
@@ -154,7 +154,8 @@ def delete_group_schedule():
     if form.validate_on_submit():
         if not form.confirm_delete.data:
             flash('Вы не подтвердили удаление')
-            return render_template('delete_group_schedule.html', form=form)
+            return render_template('delete_group_schedule.html',
+                                   title='Удаление расписания занятий выбранной группы', form=form)
 
         organization = form.organization.data.strip()
         faculty = form.faculty.data.strip()
@@ -165,7 +166,8 @@ def delete_group_schedule():
 
                 if db_data is None:
                     flash('Такой группы нет в базе данных')
-                    return render_template('delete_group_schedule.html', form=form)
+                    return render_template('delete_group_schedule.html',
+                                           title='Удаление расписания занятий выбранной группы', form=form)
 
                 tag = db_data[1]
                 db.delete_schedule(tag)
@@ -174,8 +176,10 @@ def delete_group_schedule():
             flash(str(e))
             current_app.logger.warning('delete_group_schedule: {}'.format(str(e)))
         finally:
-            return render_template('delete_group_schedule.html', form=form)
-    return render_template('delete_group_schedule.html', form=form)
+            return render_template('delete_group_schedule.html',
+                                   title='Удаление расписания занятий выбранной группы', form=form)
+    return render_template('delete_group_schedule.html',
+                           title='Удаление расписания занятий выбранной группы', form=form)
 
 
 @bp.route('/delete_group_exams', methods=['GET', 'POST'])
@@ -186,7 +190,8 @@ def delete_group_exams():
     if form.validate_on_submit():
         if not form.confirm_delete.data:
             flash('Вы не подтвердили удаление')
-            return render_template('delete_group_exams.html', form=form)
+            return render_template('delete_group_exams.html',
+                                   title='Удаление расписания экзаменов выбранной группы', form=form)
 
         organization = form.organization.data.strip()
         faculty = form.faculty.data.strip()
@@ -197,7 +202,8 @@ def delete_group_exams():
 
                 if db_data is None:
                     flash('Такой группы нет в базе данных')
-                    return render_template('delete_group_exams.html', form=form)
+                    return render_template('delete_group_exams.html',
+                                           title='Удаление расписания экзаменов выбранной группы', form=form)
 
                 tag = db_data[1]
                 db.delete_exams(tag)
@@ -206,8 +212,10 @@ def delete_group_exams():
             flash(str(e))
             current_app.logger.warning('delete_group_exams: {}'.format(str(e)))
         finally:
-            return render_template('delete_group_exams.html', form=form)
-    return render_template('delete_group_exams.html', form=form)
+            return render_template('delete_group_exams.html',
+                                   title='Удаление расписания экзаменов выбранной группы', form=form)
+    return render_template('delete_group_exams.html',
+                           title='Удаление расписания экзаменов выбранной группы', form=form)
 
 
 @bp.route('/delete_all_schedule', methods=['GET', 'POST'])
@@ -218,7 +226,8 @@ def delete_all_schedule():
     if form.validate_on_submit():
         if not form.confirm_delete.data:
             flash('Вы не подтвердили удаление')
-            return render_template('delete_all_schedule.html', form=form)
+            return render_template('delete_all_schedule.html',
+                                   title='Удаление расписания занятий всех групп', form=form)
 
         try:
             with ScheduleDB(current_app.config) as db:
@@ -239,8 +248,10 @@ def delete_all_schedule():
             flash(str(e))
             current_app.logger.warning('delete_all_schedule: {}'.format(str(e)))
         finally:
-            return render_template('delete_all_schedule.html', form=form)
-    return render_template('delete_all_schedule.html', form=form)
+            return render_template('delete_all_schedule.html',
+                                   title='Удаление расписания занятий всех групп', form=form)
+    return render_template('delete_all_schedule.html',
+                           title='Удаление расписания занятий всех групп', form=form)
 
 
 @bp.route('/delete_all_exams', methods=['GET', 'POST'])
@@ -251,7 +262,8 @@ def delete_all_exams():
     if form.validate_on_submit():
         if not form.confirm_delete.data:
             flash('Вы не подтвердили удаление')
-            return render_template('delete_all_exams.html', form=form)
+            return render_template('delete_all_exams.html',
+                                   title='Удаление расписания экзаменов всех групп', form=form)
 
         try:
             with ScheduleDB(current_app.config) as db:
@@ -272,8 +284,10 @@ def delete_all_exams():
             flash(str(e))
             current_app.logger.warning('delete_all_exams: {}'.format(str(e)))
         finally:
-            return render_template('delete_all_exams.html', form=form)
-    return render_template('delete_all_exams.html', form=form)
+            return render_template('delete_all_exams.html',
+                                   title='Удаление расписания экзаменов всех групп', form=form)
+    return render_template('delete_all_exams.html',
+                           title='Удаление расписания экзаменов всех групп', form=form)
 
 
 def can_be_deleted(faculty_title, group_title):
@@ -319,7 +333,8 @@ def delete_old_groups():
     if form.validate_on_submit():
         if not form.confirm_delete.data:
             flash('Вы не подтвердили удаление')
-            return render_template('delete_old_groups.html', form=form)
+            return render_template('delete_old_groups.html',
+                                   title='Удаление выпустившихся групп', form=form)
 
         deleted_groups_table = []
         try:
@@ -348,5 +363,7 @@ def delete_old_groups():
             flash(str(e))
             current_app.logger.warning('delete_old_groups: {}'.format(str(e)))
         finally:
-            return render_template('delete_old_groups.html', form=form, deleted_groups_table=deleted_groups_table)
-    return render_template('delete_old_groups.html', form=form)
+            return render_template('delete_old_groups.html',
+                                   title='Удаление выпустившихся групп', form=form, deleted_groups_table=deleted_groups_table)
+    return render_template('delete_old_groups.html',
+                           title='Удаление выпустившихся групп', form=form)

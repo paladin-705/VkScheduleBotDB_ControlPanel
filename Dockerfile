@@ -17,6 +17,8 @@ RUN apk update \
     && apk upgrade \
     && apk add tzdata \
     && apk add git build-base postgresql-dev libffi-dev \
+    && mkdir log \
+    && mkdir socket \
     && mkdir uploads
 
 COPY control_panel.py deploy requirements.txt ./

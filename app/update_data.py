@@ -27,6 +27,50 @@ class UpdateGroupsNumberForm(FlaskForm):
     submit = SubmitField('Изменить номера групп')
 
 
+@bp.route('/update_data')
+def update_data():
+    return render_template('update_data.html', title='Изменение')
+
+
+@bp.route('/update_group', methods=['GET', 'POST'])
+def update_group():
+    form = UpdateGroupForm()
+
+    if form.validate_on_submit():
+        old_organization = form.old_organization.data.strip()
+        old_faculty = form.old_faculty.data.strip()
+        old_group = form.old_group.data.strip()
+
+        new_organization = form.new_organization.data.strip()
+        new_faculty = form.new_faculty.data.strip()
+        new_group = form.new_group.data.strip()
+        try:
+            with ScheduleDB(current_app.config) as db:
+                old_data = db.get_group(old_organization, old_faculty, old_group)
+
+                if old_data is not None:
+                    old_tag = old_data[1]
+
+                    new_data = db.get_group(new_organization, new_faculty, new_group)
+
+                    if new_data is not None:
+                        flash('Новые данные: Такая группа уже есть в базе данных')
+                    else:
+                        new_tag = db.update_organization(new_organization, new_faculty, new_group, old_tag)
+
+                        if new_tag is not None:
+                            flash('Группа успешно изменена. Tag: {}'.format(new_tag))
+                        else:
+                            flash('Ошибка изменения данных группы')
+                else:
+                    flash('Текущие данные: Такой группы нет в базе данных')
+        except BaseException as e:
+            flash(str(e))
+        finally:
+            return render_template('update_group.html', title='Изменение данных группы', form=form)
+    return render_template('update_group.html', title='Изменение данных группы', form=form)
+
+
 def inc_group_info(faculty_title, group_title):
     group_data = group_title.split('-')
     faculty_data = faculty_title.split(' ')
@@ -85,7 +129,8 @@ def update_groups_number():
     if form.validate_on_submit():
         if not form.confirm_update.data:
             flash('Вы не подтвердили изменения ')
-            return render_template('update_groups_number.html', form=form)
+            return render_template('update_groups_number.html',
+                                   title='Автоматическое изменение номеров групп', form=form)
 
         updated_groups_table = []
         error_groups_table = []
@@ -138,50 +183,7 @@ def update_groups_number():
         except BaseException as e:
             flash(str(e))
         finally:
-            return render_template('update_groups_number.html', form=form, updated_groups_table=updated_groups_table,
+            return render_template('update_groups_number.html', title='Автоматическое изменение номеров групп',
+                                   form=form, updated_groups_table=updated_groups_table,
                                    error_groups_table=error_groups_table, skipped_groups_table=skipped_groups_table)
-    return render_template('update_groups_number.html', form=form)
-
-
-@bp.route('/update_data')
-def update_data():
-    return render_template('update_data.html')
-
-
-@bp.route('/update_group', methods=['GET', 'POST'])
-def update_group():
-    form = UpdateGroupForm()
-
-    if form.validate_on_submit():
-        old_organization = form.old_organization.data.strip()
-        old_faculty = form.old_faculty.data.strip()
-        old_group = form.old_group.data.strip()
-
-        new_organization = form.new_organization.data.strip()
-        new_faculty = form.new_faculty.data.strip()
-        new_group = form.new_group.data.strip()
-        try:
-            with ScheduleDB(current_app.config) as db:
-                old_data = db.get_group(old_organization, old_faculty, old_group)
-
-                if old_data is not None:
-                    old_tag = old_data[1]
-
-                    new_data = db.get_group(new_organization, new_faculty, new_group)
-
-                    if new_data is not None:
-                        flash('Новые данные: Такая группа уже есть в базе данных')
-                    else:
-                        new_tag = db.update_organization(new_organization, new_faculty, new_group, old_tag)
-
-                        if new_tag is not None:
-                            flash('Группа успешно изменена. Tag: {}'.format(new_tag))
-                        else:
-                            flash('Ошибка изменения данных группы')
-                else:
-                    flash('Текущие данные: Такой группы нет в базе данных')
-        except BaseException as e:
-            flash(str(e))
-        finally:
-            return render_template('update_group.html', form=form)
-    return render_template('update_group.html', form=form)
+    return render_template('update_groups_number.html', title='Автоматическое изменение номеров групп', form=form)

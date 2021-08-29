@@ -21,7 +21,7 @@ class ShowGroupDataForm(FlaskForm):
 @bp.route('/show_data')
 @login_required
 def show_data():
-    return render_template('show_data.html')
+    return render_template('show_data.html', title='Просмотр данных')
 
 
 @bp.route('/show_group_list')
@@ -46,7 +46,7 @@ def show_group_list():
                         'tag': tag
                     })
 
-    return render_template('show_group_list.html', groups_list=table_data)
+    return render_template('show_group_list.html', title='Список групп', groups_list=table_data)
 
 
 @bp.route('/show_group_schedule', methods=['GET', 'POST'])
@@ -66,7 +66,8 @@ def show_group_schedule():
 
                 if db_data is None:
                     flash('Группы нет в базе данных')
-                    return render_template('show_group_schedule.html', form=form)
+                    return render_template('show_group_schedule.html',
+                                           title='Расписание занятий отдельной группы', form=form)
 
                 tag = db_data[1]
                 schedule = db.get_schedule(tag)
@@ -96,9 +97,11 @@ def show_group_schedule():
             flash(str(e))
             current_app.logger.warning('show_group_schedule: {}'.format(str(e)))
         finally:
-            return render_template('show_group_schedule.html', form=form, schedule_table=schedule_table)
+            return render_template('show_group_schedule.html',
+                                   title='Расписание занятий отдельной группы', form=form, schedule_table=schedule_table)
 
-    return render_template('show_group_schedule.html', form=form)
+    return render_template('show_group_schedule.html',
+                           title='Расписание занятий отдельной группы', form=form)
 
 
 @bp.route('/show_group_exams', methods=['GET', 'POST'])
@@ -118,7 +121,8 @@ def show_group_exams():
 
                 if db_data is None:
                     flash('Группы нет в базе данных')
-                    return render_template('show_group_exams.html', form=form)
+                    return render_template('show_group_exams.html',
+                                           title='Расписание экзаменов отдельной группы', form=form)
 
                 tag = db_data[1]
                 exams = db.get_exams(tag)
@@ -134,6 +138,8 @@ def show_group_exams():
             flash(str(e))
             current_app.logger.warning('show_group_exams: {}'.format(str(e)))
         finally:
-            return render_template('show_group_exams.html', form=form, exams_table=exams_table)
+            return render_template('show_group_exams.html',
+                                   title='Расписание экзаменов отдельной группы', form=form, exams_table=exams_table)
 
-    return render_template('show_group_exams.html', form=form)
+    return render_template('show_group_exams.html',
+                           title='Расписание экзаменов отдельной группы', form=form)

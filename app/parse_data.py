@@ -93,4 +93,4 @@ def parse_data():
                 response.mimetype = 'text/json'
 
                 return response
-    return render_template('parse_data.html', form=form)
+    return render_template('parse_data.html', title='Парсинг', form=form)

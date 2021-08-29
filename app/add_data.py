@@ -141,8 +141,9 @@ def add_schedule_data():
             current_app.logger.warning('add_schedule_data: {}'.format(str(e)))
         finally:
             os.remove(os.path.join(file_path, filename))
-            return render_template('add_schedule_data.html', form=form, new_groups=new_groups)
-    return render_template('add_schedule_data.html', form=form)
+            return render_template('add_schedule_data.html', title='Загрузка расписания',
+                                   form=form, new_groups=new_groups)
+    return render_template('add_schedule_data.html', title='Загрузка расписания', form=form)
 
 
 @bp.route('/add_group_data', methods=['GET', 'POST'])
@@ -167,5 +168,5 @@ def add_group_data():
             flash(str(e))
             current_app.logger.warning('add_group_data: {}'.format(str(e)))
         finally:
-            return render_template('add_group.html', form=form)
-    return render_template('add_group_data.html', form=form)
+            return render_template('add_group.html', title='Добавление', form=form)
+    return render_template('add_group_data.html', title='Добавление', form=form)

@@ -57,5 +57,5 @@ def check_data():
             current_app.logger.warning('check_data: {}'.format(str(e)))
         finally:
             os.remove(os.path.join(file_path, filename))
-            return render_template('check_data.html', form=form, new_groups=new_groups)
-    return render_template('check_data.html', form=form)
+            return render_template('check_data.html', title='Проверка', form=form, new_groups=new_groups)
+    return render_template('check_data.html', title='Проверка', form=form)
