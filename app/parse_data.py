@@ -23,7 +23,7 @@ class ParseForm(FlaskForm):
     ]
 
     organization = StringField('Название организации', default='Студенты', validators=[DataRequired(), Length(max=80)])
-    header_row = IntegerField('Номер столбца заголовков (по умолчанию 0)', default=0, validators=[InputRequired(), NumberRange(min=0)])
+    header_row = IntegerField('Номер строки заголовков (по умолчанию 0)', default=0, validators=[InputRequired(), NumberRange(min=0)])
     schedule_type = SelectField('Тип расписания', choices=choices, validators=[DataRequired()])
     file = FileField('xlsx файл с расписанием', validators=[DataRequired(), FileAllowed(['xlsx'])])
     submit = SubmitField('Создать JSON файл', render_kw={"onclick": "show_loading_message()"})
