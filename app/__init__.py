@@ -38,7 +38,8 @@ def create_app():
 
     bootstrap.init_app(app)
     bcrypt.init_app(app)
-    login_manager.login_view = "auth.login"
+    login_manager.login_view = 'auth.login'
+    login_manager.login_message = 'Для доступа к этой странице вам необходимо авторизоваться'
     login_manager.init_app(app)
 
     from app.main_data import bp as main_data_bp
