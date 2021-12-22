@@ -14,8 +14,8 @@ Docker Hub: [paladin705/vk_schedule_bot_db_control_panel](https://hub.docker.com
 Для запуска docker контейнера загружаемого с [Docker Hub](https://hub.docker.com/r/paladin705/vk_schedule_bot_db_control_panel) можно использовать следующую команду:
 ```shell
 docker run \
-    -v ./vk_bot_api/socket:/api/socket \
-    -v ./vk_bot_api/log:/api/log \
+    -v ./control_panel/socket:/control_panel/socket \
+    -v ./control_panel/log:/control_panel/log \
     -e DB_NAME=<Введите значение параметра> \
     -e DB_USER=Введите значение параметра<> \
     -e DB_PASSWORD=<Введите значение параметра> \
