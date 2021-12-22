@@ -90,7 +90,7 @@ def parse_classroom(cell_value):
     classroom = ''
     try:
         result = re.findall(r'\w{1,2}\s?\d[_-]\d{3}|\d[_-]\d{3}|\w\.\d', cell_value)
-     except:
+    except:
         result = []
     
     if len(result) >= 1:
